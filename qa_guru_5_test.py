@@ -24,7 +24,7 @@ def test_complete_form(open_browser):
     browser.element('.react-datepicker__month-select').type('December')
     browser.element('.react-datepicker__year-select').type(2000)
     browser.element('.react-datepicker__day--012:not(.react-datepicker__day--outside-month)').click()
-
+    browser.element('#subjectsInput').type('commerce').press_enter()
     browser.element('[for ="hobbies-checkbox-1"]').click()
     browser.element('[for ="hobbies-checkbox-2"]').click()
     browser.element('#uploadPicture').set_value(
@@ -35,19 +35,22 @@ def test_complete_form(open_browser):
 
     browser.element('#react-select-3-input').type('Uttar Pradesh').press_enter()
     browser.element('#react-select-4-input').type('Agra').press_enter()
-    browser.element('#submit').click()
+    browser.element('#submit').press_enter()
+
+
 
     # THEN
 
-    browser.element('.table').all('td').should(have.texts(
+    browser.all('.table-responsive td:nth-child(2)').should(have.texts(
         'Olga Fa',
         'opuss77@gmail.com',
         'Female',
         '8977777151',
-        '12-12-2000',
-        'Reading,Sports',
+        '12 December,2000',
+        'Commerce',
+        'Sports, Reading',
         '111.jpg',
         'Minskay',
-        'Uttar Pradesh', ' Agra',
+        'Uttar Pradesh Agra'
     )
     )
